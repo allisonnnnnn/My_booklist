@@ -23,10 +23,10 @@ class UI {
            ] 
            const books = StoredBooks;
 
-           books.forEach((book)=> UI.addBookToLost(book))
+           books.forEach((book)=> UI.addBookToList(book))
       }
 
-      static addBookToLost(book){
+      static addBookToList(book){
             const list = document.querySelector('#book-list')
 
             const row = document.createElement('tr');
@@ -48,5 +48,22 @@ class UI {
 document.addEventListener('DOMContentLoaded', UI.displayBooks)
 
 // Event: Add a book
+document.querySelector('#book-form').addEventListener('submit',(e)=>{
+// Prevent submit action
+e.preventDefault()
+
+      // get form vakues
+      const title = document.querySelector('#title').value;
+      const author = document.querySelector('#author').value;
+      const isbn = document.querySelector('#isbn').value;
+
+      // Instatiate book
+
+      const book = new Book(title,author,isbn)
+      console.log(book)
+
+      // Add book to UI
+      UI.addBookToList(book)
+})
 
 // Event: Remove a Book
